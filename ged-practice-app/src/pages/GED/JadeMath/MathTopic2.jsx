@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import Navbar from '../../../components/Navbar'
-import Cone from '../../../assets/Cone.svg'
+import OptionMC from '../../../components/OptionMC'
 import {
         findVolumeCone,
-
        } from './QuestionGenerator/JadeMQG'
 
 function MathTopic2() {
@@ -57,44 +56,39 @@ function MathTopic2() {
             {/* Tells if an option has been chosen and answered */}
             {answerStatus ? <p className='mb-2'> {answerStatus} </p> : <p className='mb-2'> Choose an option </p>}
 
-            {/* Options */}
+            {/* Options (Multiple Choice) */}
             <div className='w-3/4'>
-              
-                 <div 
-                   onClick={answerStatus ? null : () => {setSelectedAnswer(currentQuestion.answer1)}} 
-                   className={`
-                     flex select-none py-2 px-24 rounded-md border-gray-300 border mb-3 cursor-pointer
-                     ${!answerStatus && currentQuestion.answer1 == selectedAnswer ? "bg-slate-400" 
-                         : answerStatus && currentQuestion.answer1 === currentQuestion.correct_answer ? "bg-emerald-400" 
-                         : answerStatus &&  currentQuestion.answer1 !== currentQuestion.correct_answer ? "bg-red-400"
-                         : "hover:shadow-lg hover:border-gray-500"} `}> {currentQuestion.answer1} </div>
+                
+                <OptionMC 
+                  selectAnswer={() => {setSelectedAnswer(currentQuestion.answer1)}} 
+                  answer={currentQuestion.answer1} 
+                  correct_answer={currentQuestion.correct_answer} 
+                  answerStatus={answerStatus} 
+                  selectedAnswer={selectedAnswer}/>
                   
-                   <div 
-                   onClick={answerStatus ? null : () => {setSelectedAnswer(currentQuestion.answer2)}} 
-                   className={`
-                     flex select-none py-2 px-24 rounded-md border-gray-300 border mb-3 cursor-pointer
-                     ${!answerStatus && currentQuestion.answer2 == selectedAnswer ? "bg-slate-400" 
-                         : answerStatus && currentQuestion.answer2 === currentQuestion.correct_answer ? "bg-emerald-400" 
-                         : answerStatus &&  currentQuestion.answer2 !== currentQuestion.correct_answer ? "bg-red-400"
-                         : "hover:shadow-lg hover:border-gray-500"} `}> {currentQuestion.answer2} </div>
-                  
-                  <div 
-                   onClick={answerStatus ? null : () => {setSelectedAnswer(currentQuestion.answer3)}} 
-                   className={`
-                     flex select-none py-2 px-24 rounded-md border-gray-300 border mb-3 cursor-pointer
-                     ${!answerStatus && currentQuestion.answer3 == selectedAnswer ? "bg-slate-400" 
-                         : answerStatus && currentQuestion.answer3 === currentQuestion.correct_answer ? "bg-emerald-400" 
-                         : answerStatus &&  currentQuestion.answer3 !== currentQuestion.correct_answer ? "bg-red-400"
-                         : "hover:shadow-lg hover:border-gray-500"} `}> {currentQuestion.answer3} </div>
-                   
-                   <div 
-                   onClick={answerStatus ? null : () => {setSelectedAnswer(currentQuestion.answer4)}} 
-                   className={`
-                     flex select-none py-2 px-24 rounded-md border-gray-300 border mb-3 cursor-pointer
-                     ${!answerStatus && currentQuestion.answer4 == selectedAnswer ? "bg-slate-400" 
-                         : answerStatus && currentQuestion.answer4 === currentQuestion.correct_answer ? "bg-emerald-400" 
-                         : answerStatus &&  currentQuestion.answer4 !== currentQuestion.correct_answer ? "bg-red-400"
-                         : "hover:shadow-lg hover:border-gray-500"} `}> {currentQuestion.answer4} </div>
+
+                <OptionMC 
+                  selectAnswer={() => {setSelectedAnswer(currentQuestion.answer2)}} 
+                  answer={currentQuestion.answer2} 
+                  correct_answer={currentQuestion.correct_answer} 
+                  answerStatus={answerStatus} 
+                  selectedAnswer={selectedAnswer}/>
+
+                <OptionMC 
+                  selectAnswer={() => {setSelectedAnswer(currentQuestion.answer3)}} 
+                  answer={currentQuestion.answer3} 
+                  correct_answer={currentQuestion.correct_answer} 
+                  answerStatus={answerStatus} 
+                  selectedAnswer={selectedAnswer}/>
+
+                <OptionMC 
+                  selectAnswer={() => {setSelectedAnswer(currentQuestion.answer4)}} 
+                  answer={currentQuestion.answer4} 
+                  correct_answer={currentQuestion.correct_answer} 
+                  answerStatus={answerStatus} 
+                  selectedAnswer={selectedAnswer}/> 
+
+
             </div>
  
            

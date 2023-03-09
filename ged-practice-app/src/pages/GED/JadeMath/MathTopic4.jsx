@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from '../../../components/Navbar'
+import OptionMC from '../../../components/OptionMC'
 import {
           solveForXEasy, 
           randomNumber,
@@ -52,64 +53,59 @@ function MathTopic4() {
  
          
           
-          <div className='flex items-center flex-col bg-slate-200 p-8 rounded-md w-full h-full lg:w-2/4 lg:h-2/4'>
-          <p className='font-semibold mb-2'>{currentQuestion.question}</p>
-          {answerStatus ? <p className='mb-2'> {answerStatus} </p> : <p className='mb-2'> Choose an option </p>}
+        <div className='flex items-center flex-col bg-slate-200 p-8 rounded-md w-full h-full lg:w-2/4 lg:h-2/4'>
+            {/* Prompt */}
+            <p className='font-semibold mb-2'>{currentQuestion.question}</p>
+            {answerStatus ? <p className='mb-2'> {answerStatus} </p> : <p className='mb-2'> Choose an option </p>}
 
-          <div className='w-full'>
-            <div 
-            onClick={answerStatus ? null : () => {setSelectedAnswer(currentQuestion.answer1)}} 
-            className={`
-              flex select-none py-2 px-24 rounded-md border-gray-300 border mb-3 cursor-pointer
-              ${!answerStatus && currentQuestion.answer1 == selectedAnswer ? "bg-slate-400" 
-                  : answerStatus && currentQuestion.answer1 === currentQuestion.correct_answer ? "bg-emerald-400" 
-                  : answerStatus &&  currentQuestion.answer1 !== currentQuestion.correct_answer ? "bg-red-400"
-                  : "hover:shadow-lg hover:border-gray-500"} `}> {currentQuestion.answer1} </div>
-            
-            <div 
-            onClick={answerStatus ? null : () => {setSelectedAnswer(currentQuestion.answer2)}} 
-            className={`
-              flex select-none py-2 px-24 rounded-md border-gray-300 border mb-3 cursor-pointer
-              ${!answerStatus && currentQuestion.answer2 == selectedAnswer ? "bg-slate-400" 
-                  : answerStatus && currentQuestion.answer2 === currentQuestion.correct_answer ? "bg-emerald-400" 
-                  : answerStatus &&  currentQuestion.answer2 !== currentQuestion.correct_answer ? "bg-red-400"
-                  : "hover:shadow-lg hover:border-gray-500"} `}> {currentQuestion.answer2} </div>
-            
-            <div 
-            onClick={answerStatus ? null : () => {setSelectedAnswer(currentQuestion.answer3)}} 
-            className={`
-              flex select-none py-2 px-24 rounded-md border-gray-300 border mb-3 cursor-pointer
-              ${!answerStatus && currentQuestion.answer3 == selectedAnswer ? "bg-slate-400" 
-                  : answerStatus && currentQuestion.answer3 === currentQuestion.correct_answer ? "bg-emerald-400" 
-                  : answerStatus &&  currentQuestion.answer3 !== currentQuestion.correct_answer ? "bg-red-400"
-                  : "hover:shadow-lg hover:border-gray-500"} `}> {currentQuestion.answer3} </div>
-            
-            <div 
-            onClick={answerStatus ? null : () => {setSelectedAnswer(currentQuestion.answer4)}} 
-            className={`
-              flex select-none py-2 px-24 rounded-md border-gray-300 border mb-3 cursor-pointer
-              ${!answerStatus && currentQuestion.answer4 == selectedAnswer ? "bg-slate-400" 
-                  : answerStatus && currentQuestion.answer4 === currentQuestion.correct_answer ? "bg-emerald-400" 
-                  : answerStatus &&  currentQuestion.answer4 !== currentQuestion.correct_answer ? "bg-red-400"
-                  : "hover:shadow-lg hover:border-gray-500"} `}> {currentQuestion.answer4} </div>
+            {/* Options (Multiple Choice) */}
+            <div className='w-full'>
+                
+                <OptionMC 
+                  selectAnswer={() => {setSelectedAnswer(currentQuestion.answer1)}} 
+                  answer={currentQuestion.answer1} 
+                  correct_answer={currentQuestion.correct_answer} 
+                  answerStatus={answerStatus} selectedAnswer={selectedAnswer}/>
+                  
 
-          </div>
- 
-           
-           <button 
-            className='ml-auto mt-4 rounded-md bg-emerald-600 py-2 px-3 text-white' 
-            type="submit"
-            onClick={!answerStatus ? () => {validateAnswer(selectedAnswer, currentQuestion.correct_answer)}
-            :() => {nextQuestion()} }> {!answerStatus ? 'Check' : 'Next Question'} 
-           </button>
+                <OptionMC 
+                  selectAnswer={() => {setSelectedAnswer(currentQuestion.answer2)}} 
+                  answer={currentQuestion.answer2} 
+                  correct_answer={currentQuestion.correct_answer} 
+                  answerStatus={answerStatus} 
+                  selectedAnswer={selectedAnswer}/>
 
-         </div>
-         
-         
-         <div className='hidden flex items-center flex-col bg-slate-200 p-8 mt-2 rounded-md w-2/4 h-2/4 lg:w-1/4 lg:h-1/4'>
-           <p> {currentQuestion.info ?  currentQuestion.info.map((item) => (<p> {item} </p>)  ) : 'hi'} </p>
-         </div>
- 
+                <OptionMC 
+                  selectAnswer={() => {setSelectedAnswer(currentQuestion.answer3)}} 
+                  answer={currentQuestion.answer3} 
+                  correct_answer={currentQuestion.correct_answer} 
+                  answerStatus={answerStatus} 
+                  selectedAnswer={selectedAnswer}/>
+
+                <OptionMC 
+                  selectAnswer={() => {setSelectedAnswer(currentQuestion.answer4)}} 
+                  answer={currentQuestion.answer4} 
+                  correct_answer={currentQuestion.correct_answer} 
+                  answerStatus={answerStatus} 
+                  selectedAnswer={selectedAnswer}/> 
+
+
+            </div>
+
+            {/* Check answer button */}
+            <button 
+                className='ml-auto mt-4 rounded-md bg-emerald-600 py-2 px-3 text-white' 
+                type="submit"
+                onClick={!answerStatus ? () => {validateAnswer(selectedAnswer, currentQuestion.correct_answer)}
+                :() => {nextQuestion()} }> {!answerStatus ? 'Check' : 'Next Question'} 
+            </button>
+            
+            {/* Question info (for dev purposes, remove on deploy) */}
+            <div className='hidden flex items-center flex-col bg-slate-200 p-8 mt-2 rounded-md w-2/4 h-2/4 lg:w-1/4 lg:h-1/4'>
+              <p> {currentQuestion.info ?  currentQuestion.info.map((item) => (<p> {item} </p>)  ) : 'hi'} </p>
+            </div>
+
+        </div>
      </main>
     </>
    )
