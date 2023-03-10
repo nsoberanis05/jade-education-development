@@ -21,17 +21,17 @@ function Navbar() {
     } catch (error) {
       setErrorMessage('Failed to log out')
     }
-  }
-  // This is causing too many errors, please fix before uncommenting 
+  } 
 
-  /* useEffect(() => {
+  // Listens to click outside of the dropdown while its active to de-activate it.
+  useEffect(() => {
     const handler = (e) => {
-      if(!menuRef.current.contains(e.target)) changeMenuState(false)
+      if(!menuRef.current?.contains(e.target)) changeMenuState(false)
     }
     document.addEventListener('mousedown', handler)
 
     return document.removeEventListener('mousedown', handler)
-  },[]) */
+  },[])
   
   return (
     <>
