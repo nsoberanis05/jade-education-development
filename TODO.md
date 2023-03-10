@@ -8,6 +8,8 @@ Things left to do
 - [ ] Create and impliment timer
 - [ ] Finish Topic 2 question generator
 - [ ] Fix navbar error: cannot read HTMLdocument.contains type null 'contains'
+- [ ] Create usernames for users
+- [ ] Re-create login / signup forms and add validation
 
 
 ### In Progress
