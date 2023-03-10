@@ -92,8 +92,8 @@ export const solveForXEasy = () => {
 
 /**
  * Generates a medium level quadratic solve for x equation
- * @todo fix error where variable second can be zero
- * @todo generate fake answers
+ * 
+ * Multiple choice options are still too innacurate to implement therefore the user has to input an answer
  * @returns {object} 
  */
 export const solveForXQuadratic = () => {
@@ -119,41 +119,61 @@ export const solveForXQuadratic = () => {
   let e = randomNumber(3,-3)
   let f = randomNumber(8,-8)
 
+  while((e * b) + (f * c) == 0){
+    a = randomNumber(3,-3)
+    b = randomNumber(8,-8)
+    c = a
+    d = b
+    e = randomNumber(3,-3)
+    f = randomNumber(8,-8)
+  }
+
   let first = e * a; // x²
   let second = (e * b) + (f * c) // x
   let third = f * d // constant
 
-  let x1; 
-  let x2;
+  let x1 = (b * -1)/a; 
+  let x2 = (f * -1)/e;
 
-  let temp;
+  let fake_x1;
+  let fake_x2;
+  let question = `Solve for x: ${first}x² ${second > 0 ? `+ ${second}`: `- ${second * -1}`}x ${third > 0 ? `+ ${third}`: `- ${third * -1}`}`
+
+/*   let temp;
   if(!Number.isInteger((b * -1)/a)){
     temp = reduce((b * -1), a)
     x1 = `${temp[0]}/${temp[1]}`
+    temp = reduce(b, a)
+    fake_x1 = `${temp[0]}/${temp[1]}`
   }
   else {
     x1 = (b * -1)/a
+    fake_x1 = b/a
   }
 
   if(!Number.isInteger((f * -1)/e)){
     temp = reduce((f * -1), e)
     x2 = `${temp[0]}/${temp[1]}`
+    temp = reduce(f, e)
+    fake_x2 = `${temp[0]}/${temp[1]}` == fake_x1 ? `${temp[0]}/${temp[1] + 1}` : `${temp[0]}/${temp[1]}`
   }
   else {
     x2 = (f * -1)/e
+    fake_x2 = f/e == fake_x1 ? (f/e) + 1 : f/e
   }
 
-  let question = `Solve for x: ${first}x² ${second > 0 ? `+ ${second}`: `- ${second * -1}`}x ${third > 0 ? `+ ${third}`: `- ${third * -1}`}`
-  let correct_answer = x1
-  const choices = [x1,x2,0,0]
+  let correct_answer = randomNumber(2) == 1 ? x1 : x2; // only one of the x possible answers are going to be shown at a time
+
+  const choices = [correct_answer,fake_x1, fake_x2,0]
+  for(let i = 0; i < choices.length; i++){
+    if(choices[i]) continue
+  } */
+
   return {
     question: question,
-    correct_answer: correct_answer,
-    answer1: choices[0],
-    answer2: choices[1],
-    answer3: choices[2],
-    answer4: choices[3],
-    info: [a,b,c,d,e,f],
+    correct_answer: [x1,x2],
+    userInput: true,
+    info: [a,b,c,d,e,f,`x1: ${x1}`,`x2: ${x2}`],
   };
 }
 

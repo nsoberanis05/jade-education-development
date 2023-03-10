@@ -22,15 +22,16 @@ function Navbar() {
       setErrorMessage('Failed to log out')
     }
   }
-  
-  useEffect(() => {
+  // This is causing too many errors, please fix before uncommenting 
+
+  /* useEffect(() => {
     const handler = (e) => {
       if(!menuRef.current.contains(e.target)) changeMenuState(false)
     }
     document.addEventListener('mousedown', handler)
 
-    // return document.removeEventListener('mousedown', handler)
-  },[])
+    return document.removeEventListener('mousedown', handler)
+  },[]) */
   
   return (
     <>

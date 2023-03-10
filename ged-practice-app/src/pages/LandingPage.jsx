@@ -35,16 +35,6 @@ function LandingPage() {
 
           </div>
 
-          <div className='my-4'>
-            <div className='text-center rounded-lg bg-slate-300 w-48'>
-              <div className='p-6'>
-                <h1 className='text-xl mb-4'>Math</h1>
-                <p> Study math topics like algebra, geometry, and more to get ready to pass the math section.</p>
-              </div>
-              <div className= 'bg-slate-900 w-full h-12 rounded-lg'> </div>
-            </div>
-          </div>
-
       </main>
     </>
   )
