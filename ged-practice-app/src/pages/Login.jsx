@@ -39,12 +39,12 @@ function Login() {
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Log in to existing account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">Or <a
-            href="#"
+          <p className="mt-2 text-center text-sm text-gray-600">or <Link
+            to={'/signup'}
             className="font-medium text-emerald-600 hover:text-emerald-500"
           >
             sign up for a new account
-          </a>
+          </Link>
           </p>
         </div>
         <form onSubmit={handleSubmit} className="mt-8 space-y-6" action="#" method="POST">

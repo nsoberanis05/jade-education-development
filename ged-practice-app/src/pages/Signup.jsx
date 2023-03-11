@@ -53,7 +53,7 @@ function Signup() {
     try {
       setErrorMessage('')
       setLoading(true)
-      await signup(userEmail.current.value, userPassword.current.value)
+      await signup(userEmail.current.value, userPassword.current.value, userUsername.current.value)
       navigate("/")
     } catch {
       setErrorMessage('Failed to create account')
@@ -75,12 +75,12 @@ function Signup() {
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
             Sign up for a new account
           </h2>
-          <p className="mt-2 text-center text-sm text-gray-600">Or <a
-            href="#"
+          <p className="mt-2 text-center text-sm text-gray-600">or <Link
+            to={'/login'}
             className="font-medium text-emerald-600 hover:text-teal-500"
           >
             log in to existing account
-          </a>
+          </Link>
           </p>
         </div>
         {errorMessage ? <p className='text-red-500 font-semibold'> {errorMessage} </p> : null}
@@ -88,9 +88,9 @@ function Signup() {
           <input type="hidden" name="remember" value="true" />
           <div className=" rounded-md shadow-sm">
 
-            {emailMismatch ? <p> Please insert valid email</p> : null}
+            {emailMismatch ? <p className='text-red-500 text-sm my-1'> Please insert valid email</p> : null}
             <div className='mb-4'>
-              <label htmlFor="email-address" className=""> Email address </label>
+              <label htmlFor="email-address" className=""> Email Address </label>
               <input
                 id="email-address"
                 name="email"
@@ -98,13 +98,13 @@ function Signup() {
                 autoComplete="email"
                 required
                 className={`relative block w-full appearance-none rounded-none my-1 border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm`}
-                placeholder="Email address"
+                placeholder="Email Address"
                 onBlur={emailValidation}
                 ref={userEmail}
               />
             </div>
 
-            {usernameMismatch ? <p> Username should be 3-16 characters and only include letters and numbers </p>: null}
+            {usernameMismatch ? <p className='text-red-500 text-sm my-1'>Username should be 3-16 characters and only include letters and numbers </p>: null}
             <div className='mb-4'>
               <label htmlFor="Username" className=""> Username </label>
               <input
@@ -113,7 +113,7 @@ function Signup() {
                 title="Username should be 3-16 characters and only include letters and numbers" 
                 type="text"
                 required
-                className={`relative block w-full appearance-none rounded-none my-1 border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm`}
+                className={`relative block w-full appearance-none rounded-none my-1 border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm ${usernameMismatch ? 'border-red-500' : ''}`}
                 placeholder="Username"
                 pattern="^[A-Za-z0-9]{3,16}$"
                 onBlur={usernameValidation}
@@ -121,7 +121,7 @@ function Signup() {
               />
             </div>
 
-            {passwordMismatch ? <p> Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character </p>: null}
+            {passwordMismatch ? <p className='text-red-500 text-sm my-1'> Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character </p>: null}
             <div className='mb-4'>
               <label htmlFor="password" className="">
                 Password
@@ -133,7 +133,7 @@ function Signup() {
                 title="Password should be 8-20 characters and include at least 1 letter, 1 number and 1 special character"
                 autoComplete="current-password"
                 required
-                pattern={`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`}
+                pattern={`^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&?*])[a-zA-Z0-9!@#$%^&?*]{8,20}$`}
                 className="relative block w-full appearance-none rounded-none my-1 border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-teal-500 focus:outline-none focus:ring-teal-500 sm:text-sm"
                 placeholder="Password"
                 onBlur={passwordValidation}
