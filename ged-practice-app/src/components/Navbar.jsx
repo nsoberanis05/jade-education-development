@@ -29,8 +29,12 @@ function Navbar() {
       if(!menuRef.current?.contains(e.target)) changeMenuState(false)
     }
     document.addEventListener('mousedown', handler)
+    document.addEventListener("touchend", handler);
 
-    return document.removeEventListener('mousedown', handler)
+    return () => {
+      document.removeEventListener('mousedown', handler)
+      document.removeEventListener("touchend", handler);
+    }
   },[])
   
   return (
@@ -50,15 +54,11 @@ function Navbar() {
             :
             <div ref={menuRef} className="relative inline-block text-left">
               <div>
-                <button 
-                type="button"
-                onClick={() => {changeMenuState(!menuState)}}
-                className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none">
-                  Menu
-                </button>
+                <span 
+                className="material-icons cursor-pointer !text-3xl"
+                onClick={() => {changeMenuState(!menuState)}}>menu</span>  
               </div>
-            
-      
+               
               <div className={!menuState ?  "absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-0 scale-95 hidden" : "absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none transform opacity-100 scale-100"}>
                 <div className="py-1">
                   <Link to='/dashboard' className="text-gray-700 block px-4 py-2 text-sm" >Dashboard</Link>
@@ -67,7 +67,7 @@ function Navbar() {
                 </div>
               </div>
               
-          </div>
+            </div>
 
 
             }
