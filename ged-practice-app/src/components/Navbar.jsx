@@ -55,7 +55,7 @@ function Navbar() {
             <div ref={menuRef} className="relative inline-block text-left">
               <div>
                 <span 
-                className="material-icons cursor-pointer !text-3xl"
+                className="material-icons cursor-pointer !text-3xl select-none"
                 onClick={() => {changeMenuState(!menuState)}}>menu</span>  
               </div>
                
